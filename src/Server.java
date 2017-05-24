@@ -7,7 +7,7 @@ import java.util.Timer;
 public class Server {
 
     // Выбираем порт вне пределов 1-1024:
-    public static final int PORT = 8080;
+    public static final int PORT = 9090;
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static final String pathFile = "C:\\test.xml";
 

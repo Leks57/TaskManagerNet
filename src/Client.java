@@ -3,7 +3,7 @@ import java.net.*;
 import java.io.*;
 
 public class Client {
-    private static final int SERVER_PORT = 8080;
+    private static final int SERVER_PORT = 9090;
 
     public static void main(String[] args) throws IOException {
 
