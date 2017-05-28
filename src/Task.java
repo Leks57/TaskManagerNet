@@ -95,4 +95,13 @@ public class Task implements Serializable {
             System.out.println("Не выполнена");
         }
     }
+
+    public String[] taskToString() {
+        String[] s = new String[] {
+                getName(),
+                getDescription(),
+                getDate().toString()
+        };
+        return s;
+    }
 }

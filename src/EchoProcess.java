@@ -25,7 +25,8 @@ public class EchoProcess implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println("Connection accepted: " + socket);
+            Data.transmitTaskList(socket, TaskList.getInstance());
+            //System.out.println("Connection accepted: " + socket);
 
             while (true) {
                 try {
