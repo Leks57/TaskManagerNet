@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class EchoProcess implements Runnable {
 
@@ -68,9 +69,15 @@ public class EchoProcess implements Runnable {
                             Xml.saveXml();
                             break;
 
-                        default: out.println("Ничего не выбрано"); break;
+                        default:
+                            out.println("Ничего не выбрано");
+                            break;
                     }
                 }
+                    catch (SocketException e) {
+                        break;
+                    }
+
                 catch(IOException e) {
                     e.printStackTrace();
                 }

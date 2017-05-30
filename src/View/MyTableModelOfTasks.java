@@ -3,9 +3,7 @@ package View;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class MyTableModelOfTasks {
-    private String[] columnNames;
-    private String[][] data;
+public class MyTableModelOfTasks extends JTable {
     private JTable table;
     private JScrollPane tableScrollPane;
     private DefaultTableModel tableModel;
@@ -15,6 +13,10 @@ public class MyTableModelOfTasks {
     }
     public DefaultTableModel getTableModel() {
         return tableModel;
+    }
+
+    public JTable getTable() {
+        return table;
     }
 
     public MyTableModelOfTasks() {
@@ -33,6 +35,5 @@ public class MyTableModelOfTasks {
         table = new JTable(tableModel);
         this.tableScrollPane = new JScrollPane(table);
     }
-
 
 }

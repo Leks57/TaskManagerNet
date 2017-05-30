@@ -1,7 +1,6 @@
 package View;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
 import java.awt.*;
 
 public class View {
@@ -19,6 +18,9 @@ public class View {
     public JButton getSaveButton() {
         return saveButton;
     }
+    public JButton getEditButton() {
+        return editButton;
+    }
     public DefaultListModel getListModel() {
         return listModel;
     }
@@ -35,6 +37,23 @@ public class View {
     private JScrollPane scroll = new JScrollPane();
     String[] elements = {"1", "2", "3"};
     private MyTableModelOfTasks myTable;
+
+    private JFrame editFrame;
+    public JFrame getEditFrame() {
+        return editFrame;
+    }
+    private JTextField editTaskName;
+    public JTextField getEditTaskName() {
+        return editTaskName;
+    }
+    private JTextField editTaskDescription;
+    public JTextField getEditTaskDescription() {
+        return editTaskDescription;
+    }
+    private JTextField editTaskDate;
+    public JTextField getEditTaskDate() {
+        return editTaskDate;
+    }
 
     public MyTableModelOfTasks getMyTable() {
         return myTable;
@@ -81,6 +100,35 @@ public class View {
 
         myTable = new MyTableModelOfTasks();
         container.add(myTable.getTableScrollPane(), BorderLayout.CENTER);
+
+        editFrame = new JFrame("Edit Frame");
+        editFrame.getContentPane().setLayout(new BorderLayout());
+        editFrame.setSize(400,200);
+        Container editContainer = editFrame.getContentPane();
+        editContainer.setLayout(new BorderLayout());
+        Dimension textField = new Dimension(100, 30);
+        editTaskName = new JTextField("Task Name");
+        editTaskName.setPreferredSize(textField);
+        editTaskDescription = new JTextField("Task Description");
+        editTaskDescription.setPreferredSize(textField);
+        editTaskDate = new JTextField("Task Date");
+        editTaskDate.setPreferredSize(textField);
+        JTextField taskContacts = new JTextField("Task Contacts");
+        taskContacts.setPreferredSize(textField);
+        JPanel editPanel = new JPanel(new GridLayout(4, 1));
+        editPanel.add(editTaskName);
+        editPanel.add(editTaskDescription);
+        editPanel.add(editTaskDate);
+        editPanel.add(taskContacts);
+        editContainer.add(editPanel, BorderLayout.CENTER);
+
+        JPanel editButtonPanel = new JPanel(new FlowLayout());
+        JButton saveChangeButton = new JButton("Save Task");
+        JButton cancelChangeButton = new JButton("Cancel");
+        editButtonPanel.add(saveChangeButton);
+        editButtonPanel.add(cancelChangeButton);
+        editContainer.add(editButtonPanel, BorderLayout.PAGE_END);
+
 
     }
 

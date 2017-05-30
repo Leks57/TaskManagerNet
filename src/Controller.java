@@ -1,6 +1,5 @@
 import View.View;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -11,7 +10,7 @@ public class Controller {
     private Model model;
     private View view;
     private ActionListener actionListener;
-    private ActionListener action;
+    private ActionListener saveButtonAction;
 
     public Controller(Model model, View view){
         this.model = model;
@@ -47,12 +46,23 @@ public class Controller {
         };
         view.getConnectButton().addActionListener(actionListener);
 
-        action = new ActionListener() {
+        saveButtonAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             }
         };
-        view.getSaveButton().addActionListener(action);
+        view.getSaveButton().addActionListener(saveButtonAction);
+
+        view.getEditButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int i = view.getMyTable().getTable().getSelectedRow();
+                model.getTaskList().getTasks().get(i).printTask();
+                view.getEditFrame().setVisible(true);
+                view.getEditTaskName().setText(model.getTaskList().getTasks().get(i).getName());
+                view.getEditTaskDescription().setText(model.getTaskList().getTasks().get(i).getDescription());
+                view.getEditTaskDate().setText(model.getTaskList().getTasks().get(i).getDate().toString());
+            }
+        });
     }
 
 
