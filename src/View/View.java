@@ -107,13 +107,13 @@ public class View {
         Container editContainer = editFrame.getContentPane();
         editContainer.setLayout(new BorderLayout());
         Dimension textField = new Dimension(100, 30);
-        editTaskName = new JTextField("Task Name");
+        editTaskName = new JTextField("Task.Task Name");
         editTaskName.setPreferredSize(textField);
-        editTaskDescription = new JTextField("Task Description");
+        editTaskDescription = new JTextField("Task.Task Description");
         editTaskDescription.setPreferredSize(textField);
-        editTaskDate = new JTextField("Task Date");
+        editTaskDate = new JTextField("Task.Task Date");
         editTaskDate.setPreferredSize(textField);
-        JTextField taskContacts = new JTextField("Task Contacts");
+        JTextField taskContacts = new JTextField("Task.Task Contacts");
         taskContacts.setPreferredSize(textField);
         JPanel editPanel = new JPanel(new GridLayout(4, 1));
         editPanel.add(editTaskName);
@@ -123,7 +123,7 @@ public class View {
         editContainer.add(editPanel, BorderLayout.CENTER);
 
         JPanel editButtonPanel = new JPanel(new FlowLayout());
-        JButton saveChangeButton = new JButton("Save Task");
+        JButton saveChangeButton = new JButton("Save Task.Task");
         JButton cancelChangeButton = new JButton("Cancel");
         editButtonPanel.add(saveChangeButton);
         editButtonPanel.add(cancelChangeButton);

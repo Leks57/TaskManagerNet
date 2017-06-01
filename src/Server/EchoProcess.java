@@ -1,3 +1,7 @@
+package Server;
+
+import Task.*;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
@@ -26,7 +30,7 @@ public class EchoProcess implements Runnable {
     @Override
     public void run() {
         try {
-            Data.transmitTaskList(socket, TaskList.getInstance());
+            Controller.Data.transmitTaskList(socket, TaskList.getInstance());
             //System.out.println("Connection accepted: " + socket);
 
             while (true) {
@@ -45,26 +49,26 @@ public class EchoProcess implements Runnable {
 
                     switch (userChoice) {
                         case 1: // PrintTasks
-                            Data.transmitTaskList(socket, TaskList.getInstance());
+                            Controller.Data.transmitTaskList(socket, TaskList.getInstance());
                             break;
 
                         case 2: // CreateTask
                             Task newTask = new Task();
-                            newTask = Data.receiveTask(socket);
+                            newTask = Controller.Data.receiveTask(socket);
                             TaskList.getInstance().addTask(newTask);
                             Xml.saveXml();
                             break;
 
                         case 3: // EditTask
-                            Data.transmitTaskList(socket, TaskList.getInstance());
-                            task = Data.receiveTask(socket);
+                            Controller.Data.transmitTaskList(socket, TaskList.getInstance());
+                            task = Controller.Data.receiveTask(socket);
                             taskNumber = Integer.parseInt(in.readLine());
                             TaskList.getInstance().getTasks().set(taskNumber, task);
                             Xml.saveXml();
                             break;
 
                         case 4: // DeleteTask
-                            Data.transmitTaskList(socket, TaskList.getInstance());
+                            Controller.Data.transmitTaskList(socket, TaskList.getInstance());
                             TaskList.getInstance().getTasks().remove(Integer.parseInt(in.readLine()));
                             Xml.saveXml();
                             break;

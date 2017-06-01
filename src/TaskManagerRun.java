@@ -16,7 +16,7 @@ public class TaskManagerRun {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             while (action!=0) {
-                MyView.printLine();
+                View.MyView.printLine();
                 System.out.println("Выберите действие:");
                 System.out.println("1 - Exit");
                 System.out.println("2 - PrintTasks");
@@ -38,7 +38,7 @@ public class TaskManagerRun {
 
 
                 switch(action) {
-                    case 1: Xml.saveXml(); ScheduledTask.myTimer.cancel(); TaskManagerRun.timerThread.interrupt(); break; //Выход
+                    case 1: Task.Xml.saveXml(); Server.ScheduledTask.myTimer.cancel(); TaskManagerRun.timerThread.interrupt(); break; //Выход
                     case 2:
                         System.out.println("Выберите требуемый список:");
                         System.out.println("1 - Список всех задач");
@@ -58,9 +58,9 @@ public class TaskManagerRun {
                                 System.out.println("Выбрано неверное действие!"); break;
                         }
                         break; //PrintTasks
-                    case 3: tasks.createTask(); Xml.saveXml(); ScheduledTask.updateTimer(); break; //CreateTask
-                    case 4: tasks.editTask(); ScheduledTask.updateTimer(); break; //editTask
-                    case 5: Xml.saveXml(); System.out.println("Файл сохранен"); break; //saveTaskList
+                    case 3: tasks.createTask(); Task.Xml.saveXml(); Server.ScheduledTask.updateTimer(); break; //CreateTask
+                    case 4: tasks.editTask(); Server.ScheduledTask.updateTimer(); break; //editTask
+                    case 5: Task.Xml.saveXml(); System.out.println("Файл сохранен"); break; //saveTaskList
 
                     default:
                         System.out.println("Выбрано неверное действие! Повторите ввод!");
@@ -74,15 +74,15 @@ public class TaskManagerRun {
 
     public static MyMenu myMenu = new MyMenu();
 
-    static TaskList tasks = new TaskList();
+    static Task.TaskList tasks = new Task.TaskList();
 
     public static void main(String[] args) throws IOException {
 
-        Xml.defineXml(); // создание файла xml или определение текущего
+        Task.Xml.defineXml(); // создание файла xml или определение текущего
 
 
-        ScheduledTask.printMissedTasks();
-        ScheduledTask.updateTimer(); // Обновление даты первого срабатывания таймера и запуск таймера
+        Server.ScheduledTask.printMissedTasks();
+        Server.ScheduledTask.updateTimer(); // Обновление даты первого срабатывания таймера и запуск таймера
 
         //Основное МЕНЮ
         myMenu.start();

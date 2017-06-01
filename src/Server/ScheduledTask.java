@@ -1,6 +1,9 @@
+package Server;
+
+import Task.*;
+
 import java.util.Date;
 import java.util.TimerTask;
-import java.util.Timer;
 
 public class ScheduledTask extends TimerTask {
     private Date alarm = null;

@@ -1,3 +1,5 @@
+package View;
+
 public class MyView {
     public void printMainPage() {
         System.out.println("Выберите действие:");

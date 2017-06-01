@@ -1,3 +1,9 @@
+package Client;
+
+import Task.*;
+import View.*;
+import Controller.*;
+
 import java.net.*;
 
 import java.io.*;

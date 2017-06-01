@@ -1,3 +1,7 @@
+package Controller;
+
+import Model.Model;
+import Task.Task;
 import View.View;
 
 import java.awt.event.ActionEvent;
