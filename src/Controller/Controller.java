@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Model;
+import Server.Server;
 import Task.Task;
 import View.View;
 
@@ -9,12 +10,14 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.text.ParseException;
 
 public class Controller {
     private Model model;
     private View view;
     private ActionListener actionListener;
     private ActionListener saveButtonAction;
+    private int selectedTask;
 
     public Controller(Model model, View view){
         this.model = model;
@@ -59,12 +62,32 @@ public class Controller {
 
         view.getEditButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int i = view.getMyTable().getTable().getSelectedRow();
-                model.getTaskList().getTasks().get(i).printTask();
+                selectedTask = view.getMyTable().getTable().getSelectedRow();
+                model.getTaskList().getTasks().get(selectedTask).printTask();
                 view.getEditFrame().setVisible(true);
-                view.getEditTaskName().setText(model.getTaskList().getTasks().get(i).getName());
-                view.getEditTaskDescription().setText(model.getTaskList().getTasks().get(i).getDescription());
-                view.getEditTaskDate().setText(model.getTaskList().getTasks().get(i).getDate().toString());
+                view.getEditTaskName().setText(model.getTaskList().getTasks().get(selectedTask).getName());
+                view.getEditTaskDescription().setText(model.getTaskList().getTasks().get(selectedTask).getDescription());
+                view.getEditTaskDate().setText(Server.DATE_FORMAT.format(model.getTaskList().getTasks().get(selectedTask).getDate()));
+            }
+        });
+
+        view.getSaveChangeButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                model.getTaskList().getTasks().get(selectedTask).setName(view.getEditTaskName().getText());
+                model.getTaskList().getTasks().get(selectedTask).setDescription(view.getEditTaskDescription().getText());
+                try {
+                    model.getTaskList().getTasks().get(selectedTask).setDate((Server.DATE_FORMAT.parse(view.getEditTaskDate().getText())));
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
+                }
+
+                view.getEditFrame().setVisible(false);
+            }
+        });
+
+        view.getCancelChangeButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                view.getEditFrame().setVisible(false);
             }
         });
     }
